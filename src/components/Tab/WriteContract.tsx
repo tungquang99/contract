@@ -7,7 +7,7 @@ import Divider from '@mui/material/Divider';
 import Button from '@mui/material/Button';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { ethers } from 'ethers';
-import { useAccount, useContractWrite, usePrepareContractWrite, useSignMessage } from 'wagmi';
+import { useAccount, useContractWrite, usePrepareContractWrite, useSignMessage, useNetwork } from 'wagmi';
 import { PROTOCOL } from '../../contracts/abi';
 import { contractInterfacePROTOCOL } from '../../constants/constants';
 import Input from '../TextField';
@@ -23,6 +23,7 @@ const WriteContract = ({type}) => {
     const [isResult, setIsResult] = useState(false)
     const { address, isConnecting, isDisconnected } = useAccount()
     const { config, status } = usePrepareContractWrite(configWrite);
+    const { chain } = useNetwork()
 
     const { data, isLoading, isSuccess, writeAsync } = useContractWrite(config)
     const { data:signMess, isError, isLoading:isLoadingSignMess, isSuccess:isSuccessSignMess, signMessage } = useSignMessage({
@@ -33,7 +34,7 @@ const WriteContract = ({type}) => {
         setContracts(
           PROTOCOL.filter((item: any) => (item.type === 'function' || item.type === 'event') && item.stateMutability === type)
         );  
-    }, [type]);
+    }, [type, chain]);
 
 
     useEffect(() => {

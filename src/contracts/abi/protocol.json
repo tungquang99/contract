@@ -1,8 +1,27 @@
 [
   {
     "inputs": [],
-    "stateMutability": "payable",
+    "stateMutability": "nonpayable",
     "type": "constructor"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "previousAdmin",
+        "type": "address"
+      },
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "newAdmin",
+        "type": "address"
+      }
+    ],
+    "name": "AdminTransferred",
+    "type": "event"
   },
   {
     "anonymous": false,
@@ -40,141 +59,155 @@
     "inputs": [
       {
         "indexed": false,
+        "internalType": "uint256",
+        "name": "CointAmount",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint64",
+        "name": "vndAmount",
+        "type": "uint64"
+      },
+      {
+        "indexed": false,
+        "internalType": "string",
+        "name": "bankname",
+        "type": "string"
+      },
+      {
+        "indexed": false,
+        "internalType": "string",
+        "name": "AccountName",
+        "type": "string"
+      },
+      {
+        "indexed": false,
+        "internalType": "string",
+        "name": "AccountNumber",
+        "type": "string"
+      },
+      {
+        "indexed": false,
         "internalType": "address",
-        "name": "_address",
+        "name": "App_MakerID",
         "type": "address"
       },
       {
         "indexed": false,
         "internalType": "uint256",
-        "name": "ticket",
-        "type": "uint256"
-      },
-      {
-        "indexed": false,
-        "internalType": "uint256",
-        "name": "reward",
+        "name": "newSellID",
         "type": "uint256"
       }
     ],
-    "name": "fortuneDrawDone",
+    "name": "ev_make_sell",
     "type": "event"
   },
   {
+    "anonymous": false,
     "inputs": [
       {
+        "indexed": false,
         "internalType": "uint256",
-        "name": "stakeId",
+        "name": "sellID",
         "type": "uint256"
       }
     ],
-    "name": "claim",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
+    "name": "ev_processing_sell",
+    "type": "event"
   },
   {
-    "inputs": [],
-    "name": "daylyRewardStakeNELUM",
-    "outputs": [
-      {
-        "internalType": "uint256",
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [],
-    "name": "daylyRewardStakeVIM",
-    "outputs": [
-      {
-        "internalType": "uint256",
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [],
-    "name": "forTuneDraw",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "inputs": [],
-    "name": "forTuneDrawReward",
-    "outputs": [
-      {
-        "internalType": "uint256",
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
+    "anonymous": false,
     "inputs": [
       {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "sellID",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "string",
+        "name": "bankTranfferID",
+        "type": "string"
+      }
+    ],
+    "name": "ev_success_sell",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "_Fee",
+        "type": "uint256"
+      }
+    ],
+    "name": "ev_updateFee",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
         "internalType": "address",
-        "name": "_address",
+        "name": "_priceCT",
         "type": "address"
       }
     ],
-    "name": "getAllStake",
+    "name": "ev_updatePriceCT",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "internalType": "address",
+        "name": "_WrapTokenCT",
+        "type": "address"
+      }
+    ],
+    "name": "ev_updateWrapTokenCT",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "internalType": "address",
+        "name": "_treasuryCT",
+        "type": "address"
+      }
+    ],
+    "name": "ev_updatetreasuryCT",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "internalType": "address",
+        "name": "_wokerListCT",
+        "type": "address"
+      }
+    ],
+    "name": "ev_updatewokerListCT",
+    "type": "event"
+  },
+  {
+    "inputs": [],
+    "name": "admin",
     "outputs": [
       {
-        "components": [
-          {
-            "internalType": "uint256",
-            "name": "id",
-            "type": "uint256"
-          },
-          {
-            "internalType": "address",
-            "name": "user",
-            "type": "address"
-          },
-          {
-            "internalType": "uint256",
-            "name": "amount",
-            "type": "uint256"
-          },
-          {
-            "internalType": "uint256",
-            "name": "stakeAt",
-            "type": "uint256"
-          },
-          {
-            "internalType": "uint256",
-            "name": "unStakeAt",
-            "type": "uint256"
-          },
-          {
-            "internalType": "uint256",
-            "name": "lastTimeClaim",
-            "type": "uint256"
-          },
-          {
-            "internalType": "bool",
-            "name": "withdrawed",
-            "type": "bool"
-          },
-          {
-            "internalType": "address",
-            "name": "tokenContract",
-            "type": "address"
-          }
-        ],
-        "internalType": "struct VicDaoStake.Stake[]",
-        "name": "_res",
-        "type": "tuple[]"
+        "internalType": "address",
+        "name": "",
+        "type": "address"
       }
     ],
     "stateMutability": "view",
@@ -182,12 +215,25 @@
   },
   {
     "inputs": [],
-    "name": "getNELUMStake",
+    "name": "getFee",
     "outputs": [
       {
         "internalType": "uint256",
-        "name": "_res",
+        "name": "",
         "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "getPriceCT",
+    "outputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
       }
     ],
     "stateMutability": "view",
@@ -197,57 +243,87 @@
     "inputs": [
       {
         "internalType": "uint256",
-        "name": "stakeid",
+        "name": "sellID",
         "type": "uint256"
       }
     ],
-    "name": "getStake",
+    "name": "getSell",
     "outputs": [
       {
         "components": [
           {
             "internalType": "uint256",
-            "name": "id",
+            "name": "ID",
             "type": "uint256"
           },
           {
+            "internalType": "uint256",
+            "name": "CointAmount",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint64",
+            "name": "vndAmount",
+            "type": "uint64"
+          },
+          {
+            "internalType": "string",
+            "name": "bankname",
+            "type": "string"
+          },
+          {
+            "internalType": "string",
+            "name": "AccountName",
+            "type": "string"
+          },
+          {
+            "internalType": "string",
+            "name": "AccountNumber",
+            "type": "string"
+          },
+          {
             "internalType": "address",
-            "name": "user",
+            "name": "App_MakerID",
+            "type": "address"
+          },
+          {
+            "internalType": "uint64",
+            "name": "curentPrice",
+            "type": "uint64"
+          },
+          {
+            "internalType": "uint256",
+            "name": "timestamp",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint8",
+            "name": "status",
+            "type": "uint8"
+          },
+          {
+            "internalType": "address",
+            "name": "App_WorkerID",
             "type": "address"
           },
           {
             "internalType": "uint256",
-            "name": "amount",
+            "name": "startProcessTime",
             "type": "uint256"
           },
           {
             "internalType": "uint256",
-            "name": "stakeAt",
+            "name": "SuccessProcessTime",
             "type": "uint256"
           },
           {
-            "internalType": "uint256",
-            "name": "unStakeAt",
-            "type": "uint256"
-          },
-          {
-            "internalType": "uint256",
-            "name": "lastTimeClaim",
-            "type": "uint256"
-          },
-          {
-            "internalType": "bool",
-            "name": "withdrawed",
-            "type": "bool"
-          },
-          {
-            "internalType": "address",
-            "name": "tokenContract",
-            "type": "address"
+            "internalType": "string",
+            "name": "bankTranfferID",
+            "type": "string"
           }
         ],
-        "internalType": "struct VicDaoStake.Stake",
-        "name": "res",
+        "internalType": "struct xpt_sell_coin.sell",
+        "name": "",
         "type": "tuple"
       }
     ],
@@ -256,11 +332,11 @@
   },
   {
     "inputs": [],
-    "name": "getStakeCount",
+    "name": "getSellIndex",
     "outputs": [
       {
         "internalType": "uint256",
-        "name": "res",
+        "name": "",
         "type": "uint256"
       }
     ],
@@ -271,21 +347,16 @@
     "inputs": [
       {
         "internalType": "uint256",
-        "name": "timestamp",
+        "name": "sellID",
         "type": "uint256"
-      },
-      {
-        "internalType": "address",
-        "name": "tokenContract",
-        "type": "address"
       }
     ],
-    "name": "getStakeDate",
+    "name": "getSellStatus",
     "outputs": [
       {
-        "internalType": "uint256",
-        "name": "totalAmount",
-        "type": "uint256"
+        "internalType": "uint8",
+        "name": "",
+        "type": "uint8"
       }
     ],
     "stateMutability": "view",
@@ -293,12 +364,38 @@
   },
   {
     "inputs": [],
-    "name": "getVimStake",
+    "name": "getWrapTokenCT",
     "outputs": [
       {
-        "internalType": "uint256",
-        "name": "_res",
-        "type": "uint256"
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "gettreasuryCT",
+    "outputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "getwokerListCT",
+    "outputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
       }
     ],
     "stateMutability": "view",
@@ -318,16 +415,47 @@
     "type": "function"
   },
   {
-    "inputs": [],
-    "name": "minAmount",
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "CointAmount",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint64",
+        "name": "vndAmount",
+        "type": "uint64"
+      },
+      {
+        "internalType": "string",
+        "name": "bankname",
+        "type": "string"
+      },
+      {
+        "internalType": "string",
+        "name": "AccountName",
+        "type": "string"
+      },
+      {
+        "internalType": "string",
+        "name": "AccountNumber",
+        "type": "string"
+      },
+      {
+        "internalType": "address",
+        "name": "App_MakerID",
+        "type": "address"
+      }
+    ],
+    "name": "make_sell",
     "outputs": [
       {
         "internalType": "uint256",
-        "name": "",
+        "name": "sellID",
         "type": "uint256"
       }
     ],
-    "stateMutability": "view",
+    "stateMutability": "nonpayable",
     "type": "function"
   },
   {
@@ -370,6 +498,19 @@
     "type": "function"
   },
   {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "sellID",
+        "type": "uint256"
+      }
+    ],
+    "name": "processing_sell",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
     "inputs": [],
     "name": "renounceOwnership",
     "outputs": [],
@@ -379,188 +520,32 @@
   {
     "inputs": [
       {
-        "internalType": "address",
-        "name": "_admin",
-        "type": "address"
-      }
-    ],
-    "name": "setAdmin",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
         "internalType": "uint256",
-        "name": "_daylyRewardStakeNELUM",
-        "type": "uint256"
-      }
-    ],
-    "name": "setDaylyRewardStakeNELUM",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "uint256",
-        "name": "_daylyRewardStakeVIM",
-        "type": "uint256"
-      }
-    ],
-    "name": "setDaylyRewardStakeVIM",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "uint256",
-        "name": "_forTuneDrawReward",
-        "type": "uint256"
-      }
-    ],
-    "name": "setForTuneDrawReward",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "uint256",
-        "name": "_minAmount",
-        "type": "uint256"
-      }
-    ],
-    "name": "setMinAmout",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "bool",
-        "name": "_stop",
-        "type": "bool"
-      }
-    ],
-    "name": "setStopStake",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "uint256",
-        "name": "_timeWithdraw",
-        "type": "uint256"
-      }
-    ],
-    "name": "setTimeWithdraw",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "uint256",
-        "name": "_tokenOfTicket",
-        "type": "uint256"
-      }
-    ],
-    "name": "setTokenOfTicket",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "address payable",
-        "name": "_VICDAOMainContract",
-        "type": "address"
-      }
-    ],
-    "name": "setVICDAOMainContract",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "uint256",
-        "name": "amount",
+        "name": "sellID",
         "type": "uint256"
       },
       {
-        "internalType": "address",
-        "name": "tokenAddress",
-        "type": "address"
+        "internalType": "string",
+        "name": "bankTranfferID",
+        "type": "string"
       }
     ],
-    "name": "stake",
+    "name": "success_sell",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"
   },
   {
-    "inputs": [],
-    "name": "stopStake",
-    "outputs": [
+    "inputs": [
       {
-        "internalType": "bool",
-        "name": "",
-        "type": "bool"
+        "internalType": "address",
+        "name": "newAdmin",
+        "type": "address"
       }
     ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [],
-    "name": "stopStakeAt",
-    "outputs": [
-      {
-        "internalType": "uint256",
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [],
-    "name": "timeWithdraw",
-    "outputs": [
-      {
-        "internalType": "uint256",
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [],
-    "name": "tokenOfTicket",
-    "outputs": [
-      {
-        "internalType": "uint256",
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "stateMutability": "view",
+    "name": "transferAdmin",
+    "outputs": [],
+    "stateMutability": "nonpayable",
     "type": "function"
   },
   {
@@ -572,19 +557,6 @@
       }
     ],
     "name": "transferOwnership",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "uint256",
-        "name": "stakeId",
-        "type": "uint256"
-      }
-    ],
-    "name": "unStake",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"
@@ -606,11 +578,63 @@
     "inputs": [
       {
         "internalType": "uint256",
-        "name": "stakeId",
+        "name": "_Fee",
         "type": "uint256"
       }
     ],
-    "name": "withdraw",
+    "name": "updateFee",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "_priceCT",
+        "type": "address"
+      }
+    ],
+    "name": "updatePriceCT",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "_WrapTokenCT",
+        "type": "address"
+      }
+    ],
+    "name": "updateWrapTokenCT",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "_treasuryCT",
+        "type": "address"
+      }
+    ],
+    "name": "updatetreasuryCT",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "_wokerListCT",
+        "type": "address"
+      }
+    ],
+    "name": "updatewokerListCT",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"

@@ -24,7 +24,7 @@ const Home: NextPage = () => {
             <ConnectButton />
           </main>
 
-          <div style={{marginTop: "60px", display: 'flex', alignItems: 'center', justifyContent: 'center'}}>Contract Address: {contractAddress?.vicdaoStake} <Button variant="outlined" onClick={() => copyClipboard(contractAddress?.vicdaoStake)}>Copy</Button></div>
+          <div style={{marginTop: "60px", display: 'flex', alignItems: 'center', justifyContent: 'center'}}>Contract Address: {contractAddress?.protocol} <Button variant="outlined" onClick={() => copyClipboard(contractAddress?.protocol)}>Copy</Button></div>
 
           <div className="" >
               <TabContract />
